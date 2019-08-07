@@ -397,15 +397,17 @@ _zsh_autosuggest_accept() {
 		# Remove the suggestion
 		unset POSTDISPLAY
 
+		_zsh_autosuggest_invoke_original_widget $@
+
 		# Move the cursor to the end of the buffer
 		if [[ "$KEYMAP" = "vicmd" ]]; then
 			CURSOR=$(($#BUFFER - 1))
 		else
 			CURSOR=$#BUFFER
 		fi
+	else
+		_zsh_autosuggest_invoke_original_widget $@
 	fi
-
-	_zsh_autosuggest_invoke_original_widget $@
 }
 
 # Accept the entire suggestion and execute it
